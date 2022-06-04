@@ -7,9 +7,9 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface ApodApi {
-    @GET
+    @GET("apod")
     suspend fun getApod(
-        @Query("apiKey")
+        @Query("api_key")
         apiKey: String = API_KEY
     ): Apod
 }
