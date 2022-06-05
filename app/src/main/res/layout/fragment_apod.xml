@@ -31,7 +31,6 @@
         android:layout_height="match_parent"
         tools:context="com.example.apod.ui.fragments.ApodFragment" >
 
-
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/status_image"
             android:layout_width="match_parent"
@@ -93,20 +92,30 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/date" />
 
-
-        <TextView
-            android:id="@+id/description"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="24dp"
-            android:text="@{viewModel.photos.explanation}"
-            android:textColor="@android:color/black"
+            android:layout_height="0dp"
+            android:layout_marginBottom="24dp"
+            android:fillViewport="true"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/bottom_rectangle"
-            tools:text="A description of the image" />
+            app:layout_constraintTop_toBottomOf="@id/bottom_rectangle">
 
+            <TextView
+                android:id="@+id/description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="24dp"
+                android:text="@{viewModel.photos.explanation}"
+                android:textColor="@android:color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/bottom_rectangle"
+                tools:text="A description of the image" />
+
+        </ScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
