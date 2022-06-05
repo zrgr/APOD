@@ -3,7 +3,7 @@ package com.example.apod.models
 import com.squareup.moshi.Json
 
 data class Apod(
-    val copyright: String,
+    val copyright: String?,
     val date: String,
     val explanation: String,
     val hdurl: String,

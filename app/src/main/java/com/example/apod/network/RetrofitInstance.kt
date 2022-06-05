@@ -17,7 +17,6 @@ private val retrofit = Retrofit.Builder()
 
 class RetrofitInstance {
     companion object {
-
         val api by lazy {
             retrofit.create(ApodApi::class.java)
         }
