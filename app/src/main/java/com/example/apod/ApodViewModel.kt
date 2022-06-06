@@ -9,6 +9,10 @@ import androidx.lifecycle.viewModelScope
 import com.example.apod.network.RetrofitInstance
 import com.example.apod.repository.ApodRepository
 import kotlinx.coroutines.launch
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.util.Locale;
 
 class ApodViewModel : ViewModel() {
 
@@ -17,14 +21,22 @@ class ApodViewModel : ViewModel() {
 
     private val _repo = ApodRepository()
 
+    private val _day = MutableLiveData<String>()
+    var day: LiveData<String> = _day
+
+    private val _monthYear = MutableLiveData<String>()
+    var monthYear: LiveData<String> = _monthYear
+
     init {
         getApod()
+        //convertDate(photos.value!!.date)
     }
 
     private fun getApod() {
         viewModelScope.launch {
             try {
                 _photo.value = _repo.getApod()
+                convertDate(photos.value!!.date)
             } catch (e: Exception){
                 //Log
             }
@@ -32,6 +44,11 @@ class ApodViewModel : ViewModel() {
     }
 
     private fun convertDate(date: String) {
+        val pictureDate = LocalDate.parse(date)
+        val formatter = DateTimeFormatter.ofPattern("d MMM y", Locale.ENGLISH)
+        val newDate = pictureDate.format(formatter).split(" ")
 
+        _day.value = newDate[0]
+        _monthYear.value = "${newDate[1]} ${newDate[2]}"
     }
 }
