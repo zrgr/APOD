@@ -6,11 +6,9 @@ import androidx.lifecycle.ViewModel
 import com.example.apod.models.Apod
 import java.lang.Exception
 import androidx.lifecycle.viewModelScope
-import com.example.apod.network.RetrofitInstance
 import com.example.apod.repository.ApodRepository
 import kotlinx.coroutines.launch
 import java.time.LocalDate
-import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.Locale;
 
@@ -29,7 +27,6 @@ class ApodViewModel : ViewModel() {
 
     init {
         getApod()
-        //convertDate(photos.value!!.date)
     }
 
     private fun getApod() {
