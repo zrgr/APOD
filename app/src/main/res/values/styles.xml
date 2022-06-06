@@ -7,4 +7,9 @@
         <item name="cornerSizeBottomRight">25dp</item>
         <item name="cornerFamily">rounded</item>
     </style>
+
+    <style name="dateBoxText" parent="">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textStyle">bold</item>
+    </style>
 </resources>
