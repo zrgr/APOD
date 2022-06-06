@@ -30,4 +30,8 @@ class ApodViewModel : ViewModel() {
             }
         }
     }
+
+    private fun convertDate(date: String) {
+
+    }
 }
