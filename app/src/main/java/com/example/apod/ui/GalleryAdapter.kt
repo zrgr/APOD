@@ -2,19 +2,20 @@ package com.example.apod.ui
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.ListAdapter
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.example.apod.databinding.GalleryItemBinding
 import com.example.apod.models.Apod
 
-class GalleryAdapter: ListAdapter<Apod, GalleryAdapter.ApodViewHolder>(DiffCallBack) {
+class GalleryAdapter: ListAdapter<Apod, GalleryAdapter.ApodViewHolder>(DiffCallback) {
 
     class ApodViewHolder(private var binding: GalleryItemBinding
     ):
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(apod: Apod) {
-            binding.
+            binding.photo = apod
             binding.executePendingBindings()
         }
     }
@@ -33,7 +34,8 @@ class GalleryAdapter: ListAdapter<Apod, GalleryAdapter.ApodViewHolder>(DiffCallB
         parent: ViewGroup,
         viewType: Int
     ): GalleryAdapter.ApodViewHolder {
-        return ApodViewHolder(GalleryItemBinding.inflate(
+        return ApodViewHolder(
+            GalleryItemBinding.inflate(
             LayoutInflater.from(parent.context)))
     }
 

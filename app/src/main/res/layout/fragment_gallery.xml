@@ -28,5 +28,5 @@
             tools:itemCount="16"
             tools:listitem="@layout/gallery_item" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
