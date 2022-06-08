@@ -15,7 +15,10 @@ import java.util.Locale;
 class ApodViewModel : ViewModel() {
 
     private val _photo = MutableLiveData<Apod>()
-    val photos: LiveData<Apod> = _photo
+    val photo: LiveData<Apod> = _photo
+
+    private val _photos = MutableLiveData<List<Apod>>()
+    val photos: LiveData<List<Apod>> = _photos
 
     private val _repo = ApodRepository()
 
@@ -26,16 +29,28 @@ class ApodViewModel : ViewModel() {
     var monthYear: LiveData<String> = _monthYear
 
     init {
-        getApod()
+        //getApod()
+        getApodPhotos()
     }
 
     private fun getApod() {
         viewModelScope.launch {
             try {
                 _photo.value = _repo.getApod()
-                convertDate(photos.value!!.date)
+                convertDate(photo.value!!.date)
             } catch (e: Exception){
                 //Log
+            }
+        }
+    }
+
+    private fun getApodPhotos() {
+        viewModelScope.launch {
+
+            try {
+                _photos.value = _repo.getApodPhotos()
+            } catch (e: Exception) {
+                _photos.value = listOf()
             }
         }
     }

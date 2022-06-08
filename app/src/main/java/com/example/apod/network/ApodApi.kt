@@ -12,4 +12,12 @@ interface ApodApi {
         @Query("api_key")
         apiKey: String = API_KEY
     ): Apod
+
+    @GET("apod")
+    suspend fun getApodPhotos(
+        @Query("api_key")
+        apiKey: String = API_KEY,
+        @Query("start_date")
+        startDate: String = "2022-06-01"
+    ): List<Apod>
 }
