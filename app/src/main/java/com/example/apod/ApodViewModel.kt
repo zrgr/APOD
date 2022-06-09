@@ -10,7 +10,7 @@ import com.example.apod.repository.ApodRepository
 import kotlinx.coroutines.launch
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
-import java.util.Locale;
+import java.util.*
 
 class ApodViewModel : ViewModel() {
 
@@ -30,7 +30,7 @@ class ApodViewModel : ViewModel() {
 
     init {
         //getApod()
-        getApodPhotos()
+        getApodPhotos(getLastWeeksDate())
     }
 
     private fun getApod() {
@@ -44,11 +44,11 @@ class ApodViewModel : ViewModel() {
         }
     }
 
-    private fun getApodPhotos() {
+    private fun getApodPhotos(date: String) {
         viewModelScope.launch {
 
             try {
-                _photos.value = _repo.getApodPhotos()
+                _photos.value = _repo.getApodPhotos(date)
             } catch (e: Exception) {
                 _photos.value = listOf()
             }
@@ -63,4 +63,7 @@ class ApodViewModel : ViewModel() {
         _day.value = newDate[0]
         _monthYear.value = "${newDate[1]} ${newDate[2]}"
     }
+
+    private fun getLastWeeksDate() = LocalDate.now().minusDays(7).toString()
+
 }

@@ -7,5 +7,5 @@ import kotlinx.coroutines.withContext
 
 class ApodRepository {
     suspend fun getApod() = RetrofitInstance.api.getApod()
-    suspend fun getApodPhotos() = RetrofitInstance.api.getApodPhotos()
+    suspend fun getApodPhotos(date: String) = RetrofitInstance.api.getApodPhotos(startDate=date)
 }
