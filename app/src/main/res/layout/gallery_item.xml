@@ -8,6 +8,9 @@
         <variable
             name="photo"
             type="com.example.apod.models.Apod" />
+        <variable
+            name="clickListener"
+            type="com.example.apod.ui.ApodListener" />
     </data>
 
     <LinearLayout
