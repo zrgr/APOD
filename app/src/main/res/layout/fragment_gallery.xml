@@ -14,10 +14,11 @@
 
         <TextView
             android:id="@+id/gallery_title"
+            style="@style/galleryTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="8dp"
             android:text="Photos from the last week"
             android:textSize="16sp"
             app:layout_constraintBottom_toTopOf="@+id/photos_grid"
@@ -29,15 +30,15 @@
             android:id="@+id/photos_grid"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:padding="20dp"
-            app:listData="@{viewModel.photos}"
+            android:layout_marginTop="8dp"
             android:clipToPadding="false"
-            app:layoutManager=
-                "androidx.recyclerview.widget.GridLayoutManager"
+            android:padding="20dp"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/gallery_title"
+            app:listData="@{viewModel.photos}"
             app:spanCount="1"
             tools:itemCount="16"
             tools:listitem="@layout/gallery_item" />
