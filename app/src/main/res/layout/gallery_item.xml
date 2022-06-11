@@ -12,29 +12,41 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingBottom="20dp" >
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp" >
 
         <androidx.cardview.widget.CardView
             xmlns:card_view="http://schemas.android.com/apk/res-auto"
             android:id="@+id/card_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            card_view:cardCornerRadius="25dp"
-            card_view:cardElevation="10dp"
+            card_view:cardCornerRadius="15dp"
+            card_view:cardElevation="3dp"
+            app:cardUseCompatPadding="true"
             android:background="@android:color/white">
 
             <ImageView
                 android:id="@+id/apod_image"
                 android:layout_width="wrap_content"
-                android:layout_height="300dp"
+                android:layout_height="275dp"
                 android:layout_weight="1"
                 android:scaleType="fitXY"
                 android:adjustViewBounds="true"
                 app:imageUrl="@{photo.url}"
                 tools:src="@tools:sample/backgrounds/scenic"/>
 
+
+            <TextView android:id="@+id/apod_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{photo.title}"
+                tools:text="Apod Image"
+                android:textColor="@color/white"
+                android:textSize="24dp"
+                android:singleLine="true"
+                android:layout_gravity="bottom" >
+            </TextView>
+
         </androidx.cardview.widget.CardView>
     </LinearLayout>
-
 </layout>
