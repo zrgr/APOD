@@ -42,7 +42,13 @@
                 android:text="@{photo.title}"
                 tools:text="Apod Image"
                 android:textColor="@color/white"
+                android:paddingLeft="10dp"
+                android:paddingBottom="10dp"
                 android:textSize="24dp"
+                android:shadowColor="#000"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="9"
                 android:singleLine="true"
                 android:layout_gravity="bottom" >
             </TextView>
