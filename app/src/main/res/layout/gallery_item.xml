@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:paddingBottom="10dp" >
 
-        <androidx.cardview.widget.CardView
+        <com.google.android.material.card.MaterialCardView
             xmlns:card_view="http://schemas.android.com/apk/res-auto"
             android:id="@+id/card_view"
             android:layout_width="match_parent"
@@ -26,6 +26,7 @@
             card_view:cardCornerRadius="15dp"
             card_view:cardElevation="3dp"
             app:cardUseCompatPadding="true"
+            android:onClick="@{() -> clickListener.onClick(photo)}"
             android:background="@android:color/white">
 
             <ImageView
@@ -54,6 +55,6 @@
                 android:layout_gravity="bottom" >
             </TextView>
 
-        </androidx.cardview.widget.CardView>
+        </com.google.android.material.card.MaterialCardView>
     </LinearLayout>
 </layout>

@@ -67,4 +67,9 @@ class ApodViewModel : ViewModel() {
 
     private fun getLastWeeksDate() = LocalDate.now().minusDays(7).toString()
 
+    fun onApodClicked(apod: Apod) {
+        _photo.value = apod
+        convertDate(apod.date)
+    }
+
 }

@@ -6,8 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.apod.ApodViewModel
+import com.example.apod.R
 import com.example.apod.databinding.FragmentGalleryBinding
+import com.example.apod.ui.ApodListener
 import com.example.apod.ui.GalleryAdapter
 
 class GalleryFragment : Fragment() {
@@ -30,7 +33,11 @@ class GalleryFragment : Fragment() {
         // Giving the binding access to the OverviewViewModel
         binding.viewModel = viewModel
 
-        binding.photosGrid.adapter = GalleryAdapter()
+        binding.photosGrid.adapter = GalleryAdapter(ApodListener { apod ->
+            viewModel.onApodClicked(apod)
+            findNavController()
+                .navigate(R.id.action_galleryFragment_to_apodFragment)
+        })
 
         return binding.root
     }
