@@ -47,7 +47,7 @@ class ApodViewModel : ViewModel() {
     fun getApodPhotos(date: String) {
         viewModelScope.launch {
             try {
-                _photos.value = _repo.getApodPhotos(date)
+                _photos.value = _repo.getApodPhotos(date).reversed()
             } catch (e: Exception) {
                 _photos.value = listOf()
             }
