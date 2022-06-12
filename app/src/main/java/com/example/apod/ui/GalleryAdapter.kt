@@ -12,8 +12,7 @@ import com.example.apod.models.Apod
 class GalleryAdapter(val clickListener: ApodListener): ListAdapter<Apod, GalleryAdapter.ApodViewHolder>(DiffCallback) {
 
     class ApodViewHolder(private var binding: GalleryItemBinding
-    ):
-        RecyclerView.ViewHolder(binding.root) {
+    ): RecyclerView.ViewHolder(binding.root) {
 
         fun bind(clickListener: ApodListener, apod: Apod) {
             binding.photo = apod

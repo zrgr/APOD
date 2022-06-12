@@ -44,7 +44,7 @@ class ApodViewModel : ViewModel() {
         }
     }
 
-    private fun getApodPhotos(date: String) {
+    fun getApodPhotos(date: String) {
         viewModelScope.launch {
             try {
                 _photos.value = _repo.getApodPhotos(date)

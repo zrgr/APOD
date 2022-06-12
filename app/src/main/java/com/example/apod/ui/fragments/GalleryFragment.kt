@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.apod.ApodViewModel
@@ -15,7 +16,7 @@ import com.example.apod.ui.GalleryAdapter
 
 class GalleryFragment : Fragment() {
 
-    private val viewModel: ApodViewModel by viewModels()
+    private val viewModel: ApodViewModel by activityViewModels()
 
     /**
      * Inflates the layout with Data Binding, sets its lifecycle owner to the OverviewFragment

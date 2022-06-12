@@ -5,13 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.example.apod.ApodViewModel
 import com.example.apod.databinding.FragmentApodBinding
 
 class ApodFragment: Fragment() {
 
-    private val viewModel: ApodViewModel by viewModels()
+    private val viewModel: ApodViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
