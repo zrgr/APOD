@@ -48,8 +48,6 @@ class ApodViewModel : ViewModel() {
         viewModelScope.launch {
             try {
                 _photos.value = _repo.getApodPhotos(date)
-                _photo.value = _photos.value!![_photos.value!!.size-1]
-                val test = "hello"
             } catch (e: Exception) {
                 _photos.value = listOf()
             }
