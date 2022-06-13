@@ -29,19 +29,7 @@ class ApodViewModel : ViewModel() {
     var monthYear: LiveData<String> = _monthYear
 
     init {
-        //getApod()
         getApodPhotos(getLastWeeksDate())
-    }
-
-    private fun getApod() {
-        viewModelScope.launch {
-            try {
-                _photo.value = _repo.getApod()
-                convertDate(photo.value!!.date)
-            } catch (e: Exception){
-                //Log
-            }
-        }
     }
 
     fun getApodPhotos(date: String) {
