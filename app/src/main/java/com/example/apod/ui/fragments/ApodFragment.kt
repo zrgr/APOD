@@ -36,7 +36,6 @@ class ApodFragment: Fragment() {
 
 
     private fun showToast() {
-        Toast.makeText(context, "Hello", Toast.LENGTH_SHORT).show()
         findNavController()
             .navigate(R.id.action_apodFragment_to_setBackgroundFragment)
     }

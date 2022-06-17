@@ -1,5 +1,7 @@
 package com.example.apod
 
+import android.app.WallpaperManager
+import android.graphics.Bitmap
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -8,6 +10,7 @@ import java.lang.Exception
 import androidx.lifecycle.viewModelScope
 import com.example.apod.repository.ApodRepository
 import kotlinx.coroutines.launch
+import java.io.IOException
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.*
@@ -57,5 +60,4 @@ class ApodViewModel : ViewModel() {
         _photo.value = apod
         convertDate(apod.date)
     }
-
 }
