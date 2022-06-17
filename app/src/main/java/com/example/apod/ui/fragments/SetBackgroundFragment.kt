@@ -1,18 +1,15 @@
 package com.example.apod.ui.fragments
 
 import android.app.WallpaperManager
-import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.apod.ApodViewModel
-import com.example.apod.databinding.FragmentApodBinding
 import com.example.apod.databinding.FragmentSetBackgroundBinding
 import java.io.IOException
 
