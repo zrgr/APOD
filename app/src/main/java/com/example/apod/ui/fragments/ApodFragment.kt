@@ -4,10 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.apod.ApodViewModel
+import com.example.apod.R
 import com.example.apod.databinding.FragmentApodBinding
 
 class ApodFragment: Fragment() {
@@ -26,6 +29,15 @@ class ApodFragment: Fragment() {
         // Giving the binding access to the OverviewViewModel
         binding.viewModel = viewModel
 
+        binding.iconWallpaper.setOnClickListener { showToast() }
+
         return binding.root
+    }
+
+
+    private fun showToast() {
+        Toast.makeText(context, "Hello", Toast.LENGTH_SHORT).show()
+        findNavController()
+            .navigate(R.id.action_apodFragment_to_setBackgroundFragment)
     }
 }

@@ -15,5 +15,13 @@
     <fragment
         android:id="@+id/apodFragment"
         android:name="com.example.apod.ui.fragments.ApodFragment"
-        android:label="ApodFragment" />
+        android:label="ApodFragment" >
+        <action
+            android:id="@+id/action_apodFragment_to_setBackgroundFragment"
+            app:destination="@id/setBackgroundFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/setBackgroundFragment"
+        android:name="com.example.apod.ui.fragments.SetBackgroundFragment"
+        android:label="SetBackgroundFragment" />
 </navigation>

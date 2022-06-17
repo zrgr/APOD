@@ -118,6 +118,16 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/date_box" />
 
+        <ImageView
+            android:id="@+id/icon_wallpaper"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:importantForAccessibility="no"
+            app:layout_constraintStart_toStartOf="@id/date_box"
+            app:layout_constraintTop_toBottomOf="@id/bottom_rectangle"
+            app:srcCompat="@drawable/ic_baseline_wallpaper_24" />
+
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -126,7 +136,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/bottom_rectangle">
+            app:layout_constraintTop_toBottomOf="@id/icon_wallpaper">
 
             <TextView
                 android:id="@+id/description"
