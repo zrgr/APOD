@@ -24,7 +24,7 @@ class SetBackgroundFragment: Fragment() {
         val binding = FragmentSetBackgroundBinding.inflate(inflater)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
-        binding.title.setOnClickListener{ setWallpaper( binding.wallpaperPreview ) }
+        binding.setBackgroundButton.setOnClickListener{ setWallpaper( binding.wallpaperPreview ) }
 
         return binding.root
     }
