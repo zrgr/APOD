@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.apod.ApodViewModel
@@ -36,9 +37,18 @@ class SetBackgroundFragment: Fragment() {
 
         try {
             wallpaperManager.setBitmap(bitmap)
+            backgroundStatusToast("Background image changed.")
+
         }
         catch (ex: IOException) {
             ex.printStackTrace()
+            backgroundStatusToast("Image could not be set as background.")
         }
+    }
+
+
+    private fun backgroundStatusToast(message: String) {
+        val toast = Toast.makeText(context, message, Toast.LENGTH_SHORT)
+        toast.show()
     }
 }
