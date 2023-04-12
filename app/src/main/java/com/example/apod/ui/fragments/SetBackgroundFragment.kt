@@ -38,14 +38,12 @@ class SetBackgroundFragment: Fragment() {
         try {
             wallpaperManager.setBitmap(bitmap)
             backgroundStatusToast("Background image changed.")
-
         }
         catch (ex: IOException) {
             ex.printStackTrace()
             backgroundStatusToast("Image could not be set as background.")
         }
     }
-
 
     private fun backgroundStatusToast(message: String) {
         val toast = Toast.makeText(context, message, Toast.LENGTH_SHORT)
