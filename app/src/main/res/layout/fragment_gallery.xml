@@ -17,23 +17,35 @@
             style="@style/galleryTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
             android:layout_marginTop="8dp"
-            android:text="Photos from the last week"
+            android:text="APOD"
             android:textSize="24sp"
-            app:layout_constraintBottom_toTopOf="@+id/photos_grid"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="Photos from the last week" />
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/time_period"
+            style="@style/galleryTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="16dp"
+            android:text="Photos from the last"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/gallery_title"
+            tools:text="Photos from the last" />
 
         <Spinner
             android:id="@+id/time_period_spinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
             android:layout_marginTop="8dp"
             android:textSize="24dp"
-            app:layout_constraintStart_toEndOf="@+id/gallery_title"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toEndOf="@+id/time_period"
+            app:layout_constraintTop_toTopOf="@+id/time_period" />
 
 
         <androidx.recyclerview.widget.RecyclerView
@@ -47,10 +59,10 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/gallery_title"
+            app:layout_constraintTop_toBottomOf="@id/time_period"
             app:listData="@{viewModel.photos}"
             app:spanCount="1"
-            tools:itemCount="16"
+            tools:itemCount="30"
             tools:listitem="@layout/gallery_item" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

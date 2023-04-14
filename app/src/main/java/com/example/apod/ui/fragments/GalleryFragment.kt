@@ -4,8 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -16,10 +18,10 @@ import com.example.apod.databinding.FragmentGalleryBinding
 import com.example.apod.ui.ApodListener
 import com.example.apod.ui.GalleryAdapter
 
-class GalleryFragment : Fragment() {
+class GalleryFragment : Fragment(), AdapterView.OnItemSelectedListener  {
 
     private val viewModel: ApodViewModel by activityViewModels()
-    lateinit var binding: FragmentGalleryBinding
+    private lateinit var binding: FragmentGalleryBinding
 
     /**
      * Inflates the layout with Data Binding, sets its lifecycle owner to the OverviewFragment
@@ -43,15 +45,13 @@ class GalleryFragment : Fragment() {
                 .navigate(R.id.action_galleryFragment_to_apodFragment)
         })
 
-
         populateSpinner()
-
-
         return binding.root
     }
 
     private fun populateSpinner() {
         val spinner: Spinner = binding.timePeriodSpinner
+
 
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter.createFromResource(
@@ -64,5 +64,17 @@ class GalleryFragment : Fragment() {
             // Apply the adapter to the spinner
             spinner.adapter = adapter
         }
+
+        spinner.setSelection(0, false)
+        spinner.onItemSelectedListener = this
+    }
+
+    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+        val toast = Toast.makeText(context, "Item Selected $position", Toast.LENGTH_SHORT)
+        toast.show()
+    }
+
+    override fun onNothingSelected(parent: AdapterView<*>?) {
+        TODO("Not yet implemented")
     }
 }
