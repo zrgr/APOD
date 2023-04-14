@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.apod.ApodViewModel
 import com.example.apod.R
 import com.example.apod.databinding.FragmentGalleryBinding
@@ -31,12 +32,9 @@ class GalleryFragment : Fragment(), AdapterView.OnItemSelectedListener  {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         binding = FragmentGalleryBinding.inflate(inflater)
-
-        // Allows Data Binding to Observe LiveData with the lifecycle of this Fragment
         binding.lifecycleOwner = this
-
-        // Giving the binding access to the OverviewViewModel
         binding.viewModel = viewModel
 
         binding.photosGrid.adapter = GalleryAdapter(ApodListener { apod ->
@@ -52,16 +50,12 @@ class GalleryFragment : Fragment(), AdapterView.OnItemSelectedListener  {
     private fun populateSpinner() {
         val spinner: Spinner = binding.timePeriodSpinner
 
-
-        // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter.createFromResource(
             requireContext(),
             R.array.time_period_array,
             android.R.layout.simple_spinner_item
         ).also { adapter ->
-            // Specify the layout to use when the list of choices appears
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            // Apply the adapter to the spinner
             spinner.adapter = adapter
         }
 
@@ -70,11 +64,23 @@ class GalleryFragment : Fragment(), AdapterView.OnItemSelectedListener  {
     }
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-        val toast = Toast.makeText(context, "Item Selected $position", Toast.LENGTH_SHORT)
-        toast.show()
+        updateGallery(position)
     }
 
     override fun onNothingSelected(parent: AdapterView<*>?) {
         TODO("Not yet implemented")
     }
+
+    private fun updateGallery(position: Int) {
+        var gallery = binding.photosGrid
+
+        val spanCount = when (position) {
+            0 -> 1
+            1,2,3 -> 2
+            else -> 1
+        }
+
+        gallery.layoutManager = GridLayoutManager(requireContext(), spanCount)
+    }
+
 }

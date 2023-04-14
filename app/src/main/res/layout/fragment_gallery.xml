@@ -17,7 +17,7 @@
             style="@style/galleryTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="24dp"
             android:text="APOD"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
