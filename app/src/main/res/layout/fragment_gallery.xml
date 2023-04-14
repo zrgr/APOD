@@ -26,6 +26,16 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Photos from the last week" />
 
+        <Spinner
+            android:id="@+id/time_period_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textSize="24dp"
+            app:layout_constraintStart_toEndOf="@+id/gallery_title"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/photos_grid"
             android:layout_width="0dp"
