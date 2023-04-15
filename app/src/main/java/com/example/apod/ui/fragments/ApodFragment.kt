@@ -16,12 +16,13 @@ import com.example.apod.databinding.FragmentApodBinding
 class ApodFragment: Fragment() {
 
     private val viewModel: ApodViewModel by activityViewModels()
+    private lateinit var binding : FragmentApodBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding = FragmentApodBinding.inflate(inflater)
+        binding = FragmentApodBinding.inflate(inflater)
 
         // Allows Data Binding to Observe LiveData with the lifecycle of this Fragment
         binding.lifecycleOwner = this
@@ -29,13 +30,33 @@ class ApodFragment: Fragment() {
         // Giving the binding access to the OverviewViewModel
         binding.viewModel = viewModel
 
-        binding.iconWallpaper.setOnClickListener { showToast() }
+        binding.iconWallpaper.setOnClickListener { showSetBackground() }
+
+        viewModel.photo.observe(requireActivity()){ data ->
+            formatExplanation(data.explanation)
+        }
 
         return binding.root
     }
 
+    private fun formatExplanation(explanation: String) {
+        var counter = 0
+        var result = explanation
 
-    private fun showToast() {
+        for (i in explanation.indices) {
+            if (explanation[i] == '.') {
+                counter++
+                if (counter == 3) {
+                    result = result.substring(0, i+1) + "\n\n" + result.substring(i + 1)
+                    counter = 0
+                }
+            }
+        }
+        binding.description.text = result
+    }
+
+
+    private fun showSetBackground() {
         findNavController()
             .navigate(R.id.action_apodFragment_to_setBackgroundFragment)
     }
