@@ -41,20 +41,26 @@ class ApodFragment: Fragment() {
 
     private fun formatExplanation(explanation: String) {
         var counter = 0
-        var result = explanation
+        var padding = 3
+        var result = "\t" + explanation
 
         for (i in explanation.indices) {
             if (explanation[i] == '.') {
                 counter++
                 if (counter == 3) {
-                    result = result.substring(0, i+1) + "\n\n" + result.substring(i + 1)
+                    result = createParagraph(result, i, padding)
                     counter = 0
+                    padding++
                 }
             }
         }
+
         binding.description.text = result
     }
 
+    private fun createParagraph(result: String, i: Int, padding: Int): String {
+        return result.substring(0, i+ padding) + "\n\n" + result.substring(i + padding)
+    }
 
     private fun showSetBackground() {
         findNavController()
