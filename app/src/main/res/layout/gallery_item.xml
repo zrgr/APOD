@@ -11,6 +11,9 @@
         <variable
             name="clickListener"
             type="com.example.apod.ui.ApodListener" />
+        <variable
+            name="viewModel"
+            type="com.example.apod.ApodViewModel" />
     </data>
 
     <LinearLayout

@@ -12,6 +12,27 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
 
+        <ImageView
+            android:id="@+id/status_image"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="100dp"
+            app:imageStatus="@{viewModel.status}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/time_period" />
+
+        <TextView
+            android:id="@+id/loading_images_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Loading images"
+            android:textSize="24sp"
+            app:loadingImagesTitle="@{viewModel.status}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/status_image" />
+
         <TextView
             android:id="@+id/gallery_title"
             style="@style/galleryTitle"

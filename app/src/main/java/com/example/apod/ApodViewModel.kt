@@ -2,6 +2,7 @@ package com.example.apod
 
 import android.app.WallpaperManager
 import android.graphics.Bitmap
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -14,6 +15,10 @@ import java.io.IOException
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.*
+
+private const val TAG = "ApodViewModel"
+
+enum class ImageStatus { LOADING, ERROR, DONE }
 
 class ApodViewModel : ViewModel() {
 
@@ -31,17 +36,23 @@ class ApodViewModel : ViewModel() {
     private val _monthYear = MutableLiveData<String>()
     var monthYear: LiveData<String> = _monthYear
 
+    private val _status = MutableLiveData<ImageStatus>()
+    val status: LiveData<ImageStatus> = _status
+
     init {
         getApodPhotos(getLastWeeksDate())
     }
 
-    fun getApodPhotos(date: String) {
+    private fun getApodPhotos(date: String) {
+        _status.value = ImageStatus.LOADING
         viewModelScope.launch {
             try {
                 _photos.value = _repo.getApodPhotos(date).reversed()
-                var test = 1
+                _status.value = ImageStatus.DONE
             } catch (e: Exception) {
                 _photos.value = listOf()
+                _status.value = ImageStatus.ERROR
+                Log.e(TAG, "getApod() photosApi call failed");
             }
         }
     }
