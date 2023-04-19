@@ -14,35 +14,6 @@
         android:layout_height="match_parent"
         tools:context="com.example.apod.ui.fragments.SetBackgroundFragment" >
 
-
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:id="@+id/loading_message"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="100dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/wallpaper_preview">
-
-
-            <ImageView
-                android:id="@+id/status_image"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:background="@drawable/loading_animation"
-                android:layout_gravity="center" />
-
-            <TextView
-                android:id="@+id/loading_images_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Loading HD APOD Image."
-                android:textSize="24sp"
-                android:layout_gravity="center" />
-
-        </androidx.appcompat.widget.LinearLayoutCompat>
-
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/wallpaper_preview"
             app:shapeAppearanceOverlay="@style/roundedImageView"
