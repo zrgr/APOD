@@ -37,7 +37,7 @@ class ApodViewModel : ViewModel() {
     var monthYear: LiveData<String> = _monthYear
 
     private val _status = MutableLiveData<ImageStatus>()
-    val status: LiveData<ImageStatus> = _status
+    var status: LiveData<ImageStatus> = _status
 
     init {
         getApodPhotos(getLastWeeksDate())
@@ -55,6 +55,11 @@ class ApodViewModel : ViewModel() {
                 Log.e(TAG, "getApod() photosApi call failed");
             }
         }
+    }
+
+
+    fun loadHdApodImage() {
+
     }
 
     private fun convertDate(date: String) {

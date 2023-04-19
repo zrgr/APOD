@@ -6,6 +6,7 @@ import android.widget.AdapterView
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.example.apod.R
 import com.example.apod.databinding.GalleryItemBinding
 import com.example.apod.models.Apod
 

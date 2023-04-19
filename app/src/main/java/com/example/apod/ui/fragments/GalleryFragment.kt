@@ -81,6 +81,8 @@ class GalleryFragment : Fragment(), AdapterView.OnItemSelectedListener  {
         }
 
         gallery.layoutManager = GridLayoutManager(requireContext(), spanCount)
+
+
     }
 
 }
