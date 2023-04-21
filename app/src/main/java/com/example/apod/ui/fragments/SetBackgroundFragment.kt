@@ -44,6 +44,7 @@ class SetBackgroundFragment: Fragment() {
         val imgUri = url.toUri().buildUpon().scheme("https").build()
         binding.wallpaperPreview.load(imgUri) {
             placeholder(R.drawable.loading_animation)
+
         }
     }
 

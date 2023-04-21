@@ -69,6 +69,29 @@
             app:layout_constraintTop_toTopOf="@+id/time_period" />
 
 
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/change_apod_order"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toTopOf="@+id/photos_grid"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/time_period_spinner"
+            app:layout_constraintTop_toBottomOf="@+id/gallery_title">
+
+            <ImageView
+                android:id="@+id/arrow_order"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_baseline_arrow_downward"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_baseline_calendar_month"/>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/photos_grid"
             android:layout_width="0dp"
@@ -76,13 +99,12 @@
             android:layout_marginTop="8dp"
             android:clipToPadding="false"
             android:padding="5dp"
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/time_period"
             app:listData="@{viewModel.photos}"
-            app:spanCount="1"
             tools:itemCount="30"
             tools:listitem="@layout/gallery_item" />
 

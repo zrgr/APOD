@@ -47,7 +47,7 @@ class ApodViewModel : ViewModel() {
         _status.value = ImageStatus.LOADING
         viewModelScope.launch {
             try {
-                _photos.value = _repo.getApodPhotos(date).reversed()
+                _photos.value = _repo.getApodPhotos(date)
                 _status.value = ImageStatus.DONE
             } catch (e: Exception) {
                 _photos.value = listOf()
@@ -55,11 +55,6 @@ class ApodViewModel : ViewModel() {
                 Log.e(TAG, "getApod() photosApi call failed");
             }
         }
-    }
-
-
-    fun loadHdApodImage() {
-
     }
 
     private fun convertDate(date: String) {
@@ -72,6 +67,8 @@ class ApodViewModel : ViewModel() {
     }
 
     private fun getLastWeeksDate() = LocalDate.now().minusDays(7).toString()
+
+    private fun getDate(days: Long) = LocalDate.now().minusDays(days).toString()
 
     fun onApodClicked(apod: Apod) {
         _photo.value = apod
