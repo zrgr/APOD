@@ -9,6 +9,8 @@ import androidx.lifecycle.ViewModel
 import com.example.apod.models.Apod
 import java.lang.Exception
 import androidx.lifecycle.viewModelScope
+import coil.ImageLoader
+import coil.request.ImageRequest
 import com.example.apod.repository.ApodRepository
 import kotlinx.coroutines.launch
 import java.io.IOException

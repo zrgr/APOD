@@ -1,5 +1,7 @@
 package com.example.apod.ui.fragments
 
+import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,20 +10,21 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import coil.ImageLoader
+import coil.request.ImageRequest
+import coil.request.SuccessResult
 import com.example.apod.ApodViewModel
 import com.example.apod.R
 import com.example.apod.databinding.FragmentGalleryBinding
 import com.example.apod.ui.ApodListener
 import com.example.apod.ui.GalleryAdapter
+import kotlinx.coroutines.launch
 
 class GalleryFragment : Fragment(), AdapterView.OnItemSelectedListener  {
 
@@ -50,7 +53,8 @@ class GalleryFragment : Fragment(), AdapterView.OnItemSelectedListener  {
             viewModel.onApodClicked(apod)
             findNavController()
                 .navigate(R.id.action_galleryFragment_to_apodFragment)
-        })
+        }, this@GalleryFragment)
+
 
         binding.changeApodOrder.setOnClickListener { changeApodOrder() }
 
@@ -91,6 +95,28 @@ class GalleryFragment : Fragment(), AdapterView.OnItemSelectedListener  {
 
         spinner.setSelection(0, false)
         spinner.onItemSelectedListener = this
+    }
+
+    fun getImage(url: String): Bitmap? {
+
+        var test: Bitmap? = null
+
+        lifecycleScope.launch {
+            test = getBitmap(url)
+        }
+
+        return test
+    }
+
+    suspend fun getBitmap(url: String): Bitmap {
+        val loading = ImageLoader(requireContext())
+        val request = ImageRequest.Builder(requireContext())
+            .data(url)
+            .build()
+
+        val result = (loading.execute(request) as SuccessResult).drawable
+        return (result as BitmapDrawable).bitmap
+
     }
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
