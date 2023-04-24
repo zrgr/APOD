@@ -1,5 +1,6 @@
 package com.example.apod.ui.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -32,6 +33,8 @@ class ApodFragment: Fragment() {
 
         binding.iconWallpaper.setOnClickListener { showSetBackground() }
 
+        binding.iconShare.setOnClickListener { shareLink() }
+
         viewModel.photo.observe(requireActivity()){ data ->
             formatExplanation(data.explanation)
         }
@@ -60,6 +63,18 @@ class ApodFragment: Fragment() {
 
     private fun createParagraph(result: String, i: Int, padding: Int): String {
         return result.substring(0, i+ padding) + "\n\n" + result.substring(i + padding)
+    }
+
+    private fun shareLink() {
+        val sendIntent: Intent = Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_TEXT, viewModel.photo.value?.url)
+            type = "text/plain"
+        }
+
+        val shareIntent = Intent.createChooser(sendIntent, null)
+        startActivity(shareIntent)
+
     }
 
     private fun showSetBackground() {

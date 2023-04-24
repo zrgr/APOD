@@ -32,11 +32,8 @@ class ApodViewModel : ViewModel() {
 
     private val _repo = ApodRepository()
 
-    private val _day = MutableLiveData<String>()
-    var day: LiveData<String> = _day
-
-    private val _monthYear = MutableLiveData<String>()
-    var monthYear: LiveData<String> = _monthYear
+    private val _date = MutableLiveData<String>()
+    var date: LiveData<String> = _date
 
     private val _status = MutableLiveData<ImageStatus>()
     var status: LiveData<ImageStatus> = _status
@@ -63,9 +60,7 @@ class ApodViewModel : ViewModel() {
         val pictureDate = LocalDate.parse(date)
         val formatter = DateTimeFormatter.ofPattern("d MMM y", Locale.ENGLISH)
         val newDate = pictureDate.format(formatter).split(" ")
-
-        _day.value = newDate[0]
-        _monthYear.value = "${newDate[1]} ${newDate[2]}"
+        _date.value = "${newDate[1]} ${newDate[0]}, ${newDate[2]}"
     }
 
     private fun getLastWeeksDate() = LocalDate.now().minusDays(7).toString()
