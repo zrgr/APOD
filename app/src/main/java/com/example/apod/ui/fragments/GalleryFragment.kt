@@ -33,10 +33,6 @@ class GalleryFragment : Fragment(), AdapterView.OnItemSelectedListener  {
     private var isReversed = true
     private lateinit var layoutManager: LinearLayoutManager
 
-    /**
-     * Inflates the layout with Data Binding, sets its lifecycle owner to the OverviewFragment
-     * to enable Data Binding to observe LiveData, and sets up the RecyclerView with an adapter.
-     */
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -53,7 +49,7 @@ class GalleryFragment : Fragment(), AdapterView.OnItemSelectedListener  {
             viewModel.onApodClicked(apod)
             findNavController()
                 .navigate(R.id.action_galleryFragment_to_apodFragment)
-        }, this@GalleryFragment)
+        })
 
 
         binding.changeApodOrder.setOnClickListener { changeApodOrder() }
@@ -65,8 +61,6 @@ class GalleryFragment : Fragment(), AdapterView.OnItemSelectedListener  {
     }
 
     private fun changeApodOrder() {
-
-
         layoutManager.reverseLayout = !isReversed
         layoutManager.stackFromEnd = !isReversed
         isReversed = !isReversed
@@ -95,28 +89,6 @@ class GalleryFragment : Fragment(), AdapterView.OnItemSelectedListener  {
 
         spinner.setSelection(0, false)
         spinner.onItemSelectedListener = this
-    }
-
-    fun getImage(url: String): Bitmap? {
-
-        var test: Bitmap? = null
-
-        lifecycleScope.launch {
-            test = getBitmap(url)
-        }
-
-        return test
-    }
-
-    suspend fun getBitmap(url: String): Bitmap {
-        val loading = ImageLoader(requireContext())
-        val request = ImageRequest.Builder(requireContext())
-            .data(url)
-            .build()
-
-        val result = (loading.execute(request) as SuccessResult).drawable
-        return (result as BitmapDrawable).bitmap
-
     }
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {

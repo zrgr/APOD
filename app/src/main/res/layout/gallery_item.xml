@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    >
 
     <data>
         <variable
@@ -10,68 +11,51 @@
         <variable
             name="clickListener"
             type="com.example.apod.ui.ApodListener" />
-        <variable
-            name="viewModel"
-            type="com.example.apod.ApodViewModel" />
     </data>
 
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp" >
 
         <com.google.android.material.card.MaterialCardView
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
             android:id="@+id/card_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="15dp"
-            app:cardElevation="3dp"
+            card_view:cardCornerRadius="15dp"
+            card_view:cardElevation="3dp"
             app:cardUseCompatPadding="true"
             android:onClick="@{() -> clickListener.onClick(photo)}"
-            android:background="@android:color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:background="@android:color/white">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <ImageView
+                android:id="@+id/apod_image"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="500dp"
+                android:scaleType="centerCrop"
+                android:adjustViewBounds="true"
+                app:imageUrl="@{photo.url}"
+                tools:src="@tools:sample/backgrounds/scenic"/>
 
-                <ImageView
-                    android:id="@+id/apod_image"
-                    android:layout_width="match_parent"
-                    android:layout_height="300dp"
-                    android:scaleType="fitXY"
-                    android:adjustViewBounds="true"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:src="@tools:sample/backgrounds/scenic" />
-
-
-            <TextView
-                android:id="@+id/apod_title"
-                android:layout_width="wrap_content"
+            <TextView android:id="@+id/apod_title"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingLeft="10dp"
+                android:text="@{photo.title}"
+                tools:text="Apod Title"
+                android:textColor="@color/white"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
                 android:paddingBottom="10dp"
+                android:textSize="24dp"
                 android:shadowColor="#000"
                 android:shadowDx="2"
                 android:shadowDy="2"
                 android:shadowRadius="9"
                 android:singleLine="true"
-                android:text="@{photo.title}"
-                android:textColor="@color/white"
-                android:textSize="24dp"
-                android:layout_gravity="bottom"
-                tools:text="Apod Title"/>
-
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                android:layout_gravity="bottom" >
+            </TextView>
 
         </com.google.android.material.card.MaterialCardView>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 </layout>
