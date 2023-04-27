@@ -2,6 +2,7 @@ package com.example.apod.ui.fragments
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -47,8 +48,8 @@ class ApodFragment: Fragment() {
         var padding = 3
         var result = "\t" + explanation
 
-        for (i in explanation.indices) {
-            if (explanation[i] == '.') {
+        for (i in 0 until explanation.length - 1 ) {
+            if ("${explanation[i]}${explanation[i+1]}" == ". ") {
                 counter++
                 if (counter == 3) {
                     result = createParagraph(result, i, padding)
