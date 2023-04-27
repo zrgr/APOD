@@ -1,7 +1,8 @@
 package com.example.apod.ui.fragments
 
-import android.graphics.Bitmap
-import android.graphics.drawable.BitmapDrawable
+import android.app.AlertDialog
+import android.app.DatePickerDialog
+import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,21 +11,21 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import coil.ImageLoader
-import coil.request.ImageRequest
-import coil.request.SuccessResult
 import com.example.apod.ApodViewModel
 import com.example.apod.R
 import com.example.apod.databinding.FragmentGalleryBinding
 import com.example.apod.ui.ApodListener
 import com.example.apod.ui.GalleryAdapter
-import kotlinx.coroutines.launch
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.Month
+import java.util.*
 
 class GalleryFragment : Fragment(), AdapterView.OnItemSelectedListener  {
 
@@ -53,6 +54,8 @@ class GalleryFragment : Fragment(), AdapterView.OnItemSelectedListener  {
 
 
         binding.changeApodOrder.setOnClickListener { changeApodOrder() }
+
+        binding.fabSelectDate.setOnClickListener{ pickDate() }
 
         binding.photosGrid.layoutManager = layoutManager
 
@@ -101,6 +104,38 @@ class GalleryFragment : Fragment(), AdapterView.OnItemSelectedListener  {
 
     private fun updateGallery(position: Int) {
 
+    }
+
+    private fun pickDate() {
+        val calendar = Calendar.getInstance()
+
+        val year = calendar.get(Calendar.YEAR)
+        val month = calendar.get(Calendar.MONTH)
+        val day = calendar.get(Calendar.DAY_OF_MONTH)
+
+        val datePickerDialog = DatePickerDialog(
+            requireContext(),
+            R.style.ApodDatePickerStyle,
+            { view, year, monthOfYear, dayOfMonth ->
+                getApodByDate(dayOfMonth, monthOfYear, year )
+            },
+            year,
+            month,
+            day
+        )
+
+        //First APOD released date
+        calendar.set(1995, 6, 17)
+        val currentTime = Date().time
+        datePickerDialog.datePicker.minDate = currentTime - (currentTime - calendar.timeInMillis)
+        datePickerDialog.datePicker.maxDate = Date().time
+        datePickerDialog.show()
+    }
+
+    private fun getApodByDate(day: Int, month: Int, year: Int) {
+        viewModel.getApodByDate(day, month, year)
+        findNavController()
+            .navigate(R.id.action_galleryFragment_to_apodFragment)
     }
 
 }

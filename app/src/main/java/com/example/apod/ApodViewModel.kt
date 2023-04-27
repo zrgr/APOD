@@ -1,7 +1,5 @@
 package com.example.apod
 
-import android.app.WallpaperManager
-import android.graphics.Bitmap
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -9,11 +7,8 @@ import androidx.lifecycle.ViewModel
 import com.example.apod.models.Apod
 import java.lang.Exception
 import androidx.lifecycle.viewModelScope
-import coil.ImageLoader
-import coil.request.ImageRequest
 import com.example.apod.repository.ApodRepository
 import kotlinx.coroutines.launch
-import java.io.IOException
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.*
@@ -51,7 +46,18 @@ class ApodViewModel : ViewModel() {
             } catch (e: Exception) {
                 _photos.value = listOf()
                 _status.value = ImageStatus.ERROR
-                Log.e(TAG, "getApod() photosApi call failed");
+                Log.e(TAG, "getApodPhotos() call failed");
+            }
+        }
+    }
+
+    fun getApodByDate(day: Int, month: Int, year: Int) {
+        var date = convertDate(day, month, year)
+        viewModelScope.launch {
+            try {
+                _photo.value = _repo.getApodByDate(date)
+            } catch (e: Exception) {
+                Log.e(TAG, "getApodByDate() call failed");
             }
         }
     }
@@ -66,6 +72,13 @@ class ApodViewModel : ViewModel() {
     private fun getLastWeeksDate() = LocalDate.now().minusDays(7).toString()
 
     private fun getDate(days: Long) = LocalDate.now().minusDays(days).toString()
+
+    private fun convertDate(day: Int, month: Int, year: Int): String {
+        val formattedDay = if (day < 10) "0$day" else day
+        val formattedMonth = if (month < 10) "0$month" else month
+        val date = "$year$formattedMonth$formattedDay"
+        return LocalDate.parse(date, DateTimeFormatter.BASIC_ISO_DATE).toString()
+    }
 
     fun onApodClicked(apod: Apod) {
         _photo.value = apod
